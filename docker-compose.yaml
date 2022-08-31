@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  devdb:
+    container_name: devdb
+    image: container-registry.oracle.com/database/enterprise:21.3.0.0
+    ports: 
+      - 1521:1521
+      - 5500:5500
+    environment:
+      - ORACLE_PWD=orapwd
+    volumes:
+      - ./oradata:/opt/oracle/oradata
+    hostname: oracledev
+  ords:
+    container_name: ords
+    restart: always
+    depends_on:
+      - devdb
+    volumes:
+      - ./ords:/opt/oracle/variables
+    ports:
+      - 8282:8181
+    image: container-registry.oracle.com/database/ords:latest
+networks:
+  default:
+    name: ora-network
