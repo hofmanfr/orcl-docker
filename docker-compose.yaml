@@ -10,7 +10,7 @@ services:
     environment:
       - ORACLE_PWD=orapwd
     volumes:
-      - orcl_oradata:/opt/oracle/oradata
+      - orcl_oradata :/opt/oracle/oradata
     hostname: oracledev
   ords:
     container_name: ords
@@ -18,7 +18,7 @@ services:
     depends_on:
       - devdb
     volumes:
-      - orcl_ords:/opt/oracle/variables
+      - orcl_ords :/opt/oracle/variables
     ports:
       - 8282:8181
     image: container-registry.oracle.com/database/ords:latest
